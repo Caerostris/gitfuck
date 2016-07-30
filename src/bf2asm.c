@@ -10,8 +10,9 @@ int main(int argc, char* argv[])
 
 	if(argc < 2)
 	{
-		fprintf(stderr, "Usage: %s <input file> [output file]\n", argv[0]);
-		exit(1);
+		fprintf(stderr,
+			"Usage: %s <input file> [output file]\n", argv[0]);
+		return 1;
 	}
 	else if(argc >= 3)
 	{
@@ -26,14 +27,16 @@ int main(int argc, char* argv[])
 	if(in == NULL)
 	{
 		perror(argv[1]);
-		exit(1);
+		return 1;
 	}
+
 	state = bf_start(out);
 
 	while((c = fgetc(in)) != EOF)
 	{
 		bf_interpret_char(&state, c);
 	}
+
 	bf_end(state);
 	return 0;
 }
