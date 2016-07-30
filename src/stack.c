@@ -40,3 +40,8 @@ int8_t stack_pop(struct stack *stack, int *value)
 	*value = stack->values[--stack->position];
 	return 1;
 }
+
+unsigned int stack_size(struct stack *stack)
+{
+	return stack->position;
+}

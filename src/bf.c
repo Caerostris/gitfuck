@@ -88,7 +88,14 @@ void bf_down(struct bf_state state)
 
 void bf_end(struct bf_state state)
 {
+	if(stack_size(&state.loops) != 0)
+	{
+		fprintf(stderr, "ERROR: Missing ]\n");
+		exit(1);
+	}
+
 	fprintf(state.stream, "\n\tleave\n\tpopq\t%%rbx\n\tpopq\t%%r12\n\txorl\t%%eax, %%eax\n\tret\n");
+	stack_destroy(&state.loops);
 }
 
 void bf_loop_start(struct bf_state *state)
@@ -103,10 +110,9 @@ void bf_loop_end(struct bf_state *state)
 	int loop;
 	if(!stack_pop(&state->loops, &loop))
 	{
-		fprintf(stderr, "Unterminated loop\n");
+		fprintf(stderr, "ERROR: Extraneuous ]\n");
 		exit(1);
 	}
 
 	fprintf(state->stream, "\n\tcmpb\t$0, (%%rbp, %%r12)\n\tjne\t_LS_%d\n_LE_%d:\n\n", loop, loop);
-	stack_destroy(&state->loops);
 }

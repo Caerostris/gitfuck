@@ -1,8 +1,8 @@
 #include <inttypes.h>
 
 struct stack {
-	int size;
-	int position;
+	unsigned int size;
+	unsigned int position;
 	int *values;
 };
 
@@ -11,3 +11,4 @@ void stack_destroy(struct stack *stack);
 
 void stack_push(struct stack *stack, int value);
 int8_t stack_pop(struct stack *stack, int *value);
+unsigned int stack_size(struct stack *stack);
