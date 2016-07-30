@@ -1,6 +1,5 @@
 #include <stdlib.h>
 #include "stack.h"
-	#include <stdio.h> /// DELETE ME
 
 struct stack stack_create()
 {
