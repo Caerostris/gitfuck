@@ -1,3 +1,6 @@
+#ifndef BF_H_O95RF9S02E9R
+#define BF_H_O95RF9S02E9R
+
 #include <stdio.h>
 #include "stack.h"
 
@@ -21,3 +24,5 @@ void bf_end(struct bf_state state);
 
 void bf_interpret_char(struct bf_state *state, char c);
 void bf_interpret(struct bf_state *state, char *str);
+
+#endif // BF_H_O95RF9S02E9R
