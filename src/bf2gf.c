@@ -20,6 +20,7 @@ int main(int argc, char *argv[])
 	if(argc < 3)
 	{
 		printf("Usage: %s <infile> <outfolder>\n", argv[0]);
+		return 1;
 	}
 
 	fp = fopen(argv[1], "r");
