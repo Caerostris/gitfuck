@@ -8,7 +8,10 @@ It's basically Brainfuck, but without the git.
 ## The Gitfuck Language
 
 Gitfuck is 100% compatible with Brainfuck. In fact, Gitfuck is Brainfuck. The only difference is that Gitfuck programs are not stored in files, but in folders.  
-Every Gitfuck program is contained in a folder. The folder contains a number of subdirectories. The name of each subdirectory will be interpreted as a line of Brainfuck code. The line number is defined by the timestamp: The subdirectory with the lowest timestamp is line 1, the one with the second lowest timestamp is line 2. A subdirectory containing any file or folder is treated as a commented, and thus completely ignored.
+
+Every Gitfuck program is contained in a folder. The folder contains a number of subdirectories. The name of each subdirectory will be interpreted as a line of Brainfuck code. The line number is defined by the timestamp: The subdirectory with the lowest timestamp is line 1, the one with the second lowest timestamp is line 2. A subdirectory containing any file or folder is treated as a commented, and thus completely ignored.  
+
+This structure implies that Gitfuck code is only contained in the names of empty directories. Every tried to `git add` an empty directory? Good luck.
 
 ### Hello World in Gitfuck
 
