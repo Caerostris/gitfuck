@@ -30,15 +30,6 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
-	/*
-	if(mkdir(argv[2], 600) != 0)
-	{
-		perror(argv[2]);
-		fclose(fp);
-		return 1;
-	}
-	*/
-
 	text[ctr++] = '0';
 	while((c = fgetc(fp)) != EOF)
 	{
@@ -52,7 +43,6 @@ int main(int argc, char *argv[])
 			text[sizeof(text) - 1] = '\0';
 			gf_write_line(argv[2], line++, text);
 			ctr = snprintf(text, buflen, "%u", line);
-			continue;
 		}
 
 		text[ctr++] = c;
@@ -89,5 +79,19 @@ void gf_write_line(char *basedir, unsigned int line, char *text)
 int isbf(int c)
 {
 	char ch = c;
-	return ch == '.' || ch == ',' || ch == '[' || ch == ']' || ch == '+' || ch == '-' || ch == '>' || ch == '<';
+	return ch == '.' ||
+		ch == ',' ||
+		ch == '[' ||
+		ch == ']' ||
+		ch == '+' ||
+		ch == '-' ||
+		ch == '>' ||
+		ch == '<' ||
+		ch == ' ' ||
+		ch == '(' ||
+		ch == ')' ||
+		ch == '"' ||
+		ch == ':' ||
+		ch == '@' ||
+		ch == '#';
 }
