@@ -82,7 +82,10 @@ int main(int argc, char *argv[])
 		array_push(&gf_program, &line);
 	}
 
-	qsort(gf_program.values, array_size(&gf_program), sizeof(struct gf_line), gf_line_compare);
+	qsort(gf_program.values,
+		array_size(&gf_program),
+		sizeof(struct gf_line),
+		gf_line_compare);
 
 	bf_state = bf_start(out);
 	for(unsigned int i = 0; i < array_size(&gf_program); i++)
