@@ -30,6 +30,13 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	if(mkdir(argv[2], 33277) != 0)
+	{
+		perror(argv[2]);
+		fclose(fp);
+		return 1;
+	}
+
 	text[ctr++] = '0';
 	while((c = fgetc(fp)) != EOF)
 	{
@@ -63,7 +70,7 @@ void gf_write_line(char *basedir, unsigned int line, char *text)
 	struct timeval times[2];
 	snprintf(buf, len, "%s/%s", basedir, text);
 
-	if(mkdir(buf, atoi("0700")) != 0)
+	if(mkdir(buf, 33277) != 0)
 	{
 		perror(buf);
 		exit(1);
