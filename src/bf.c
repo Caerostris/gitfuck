@@ -8,7 +8,7 @@ struct bf_state bf_start(FILE *stream)
 	state.inc_ctr = 0;
 	state.loop_ctr = 0;
 	state.stream = stream;
-	state.loops = stack_create(sizeof(int));
+	state.loops = array_create(sizeof(int));
 
 	fprintf(state.stream, ".align 4\n.globl _main\n_main:\n\tpushq\t%%r12\n\tpushq\t\%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
 
@@ -88,27 +88,27 @@ void bf_down(struct bf_state state)
 
 void bf_end(struct bf_state state)
 {
-	if(stack_size(&state.loops) != 0)
+	if(array_size(&state.loops) != 0)
 	{
 		fprintf(stderr, "ERROR: Missing ]\n");
 		exit(1);
 	}
 
 	fprintf(state.stream, "\n\tleave\n\tpopq\t%%rbx\n\tpopq\t%%r12\n\txorl\t%%eax, %%eax\n\tret\n");
-	stack_destroy(&state.loops);
+	array_destroy(&state.loops);
 }
 
 void bf_loop_start(struct bf_state *state)
 {
 	int loop = ++state->loop_ctr;
-	stack_push(&state->loops, &loop);
+	array_push(&state->loops, &loop);
 	fprintf(state->stream, "\n\tcmpb\t$0, (%%rbp, %%r12)\n\tje\t_LE_%d\n_LS_%d:\n", loop, loop);
 }
 
 void bf_loop_end(struct bf_state *state)
 {
 	int loop;
-	if(!stack_pop(&state->loops, &loop))
+	if(!array_pop(&state->loops, &loop))
 	{
 		fprintf(stderr, "ERROR: Extraneuous ]\n");
 		exit(1);

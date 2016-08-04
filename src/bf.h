@@ -2,13 +2,13 @@
 #define BF_H_O95RF9S02E9R
 
 #include <stdio.h>
-#include "stack.h"
+#include "array.h"
 
 struct bf_state {
 	int inc_ctr;
 	int loop_ctr;
 	FILE *stream;
-	struct stack loops;
+	struct array loops;
 };
 
 struct bf_state bf_start(FILE *stream);
