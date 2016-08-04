@@ -8,7 +8,7 @@ struct bf_state bf_start(FILE *stream)
 	state.inc_ctr = 0;
 	state.loop_ctr = 0;
 	state.stream = stream;
-	state.loops = stack_create();
+	state.loops = stack_create(sizeof(int));
 
 	fprintf(state.stream, ".align 4\n.globl _main\n_main:\n\tpushq\t%%r12\n\tpushq\t\%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
 
@@ -101,7 +101,7 @@ void bf_end(struct bf_state state)
 void bf_loop_start(struct bf_state *state)
 {
 	int loop = ++state->loop_ctr;
-	stack_push(&state->loops, loop);
+	stack_push(&state->loops, &loop);
 	fprintf(state->stream, "\n\tcmpb\t$0, (%%rbp, %%r12)\n\tje\t_LE_%d\n_LS_%d:\n", loop, loop);
 }
 
