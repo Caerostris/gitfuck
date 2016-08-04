@@ -1,6 +1,6 @@
 CFLAGS=-Wall -Wextra
 OBJS=src/bf.c src/stack.c
-BINS=bin/gf2asm bin/bf2asm
+BINS=bin/gf2asm bin/bf2asm bin/bf2gf
 
 .PHONY: all
 all: $(BINS)
