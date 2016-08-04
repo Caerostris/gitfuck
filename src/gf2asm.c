@@ -40,6 +40,12 @@ int main(int argc, char *argv[])
 	}
 
 	dir = opendir(argv[1]);
+	if(dir == NULL)
+	{
+		perror(argv[1]);
+		return 1;
+	}
+
 	while((entry = readdir(dir)) != NULL)
 	{
 		DIR *dir_line;
