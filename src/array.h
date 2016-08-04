@@ -7,7 +7,7 @@ struct array {
 	unsigned int size;
 	unsigned int position;
 	unsigned int element_size;
-	int *values;
+	void *values;
 };
 
 struct array array_create(unsigned int element_size);
