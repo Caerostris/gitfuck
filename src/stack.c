@@ -48,6 +48,19 @@ int8_t stack_pop(struct stack *stack, void *value)
 	return 1;
 }
 
+int8_t stack_get(struct stack *stack, unsigned int index, void *value)
+{
+	void *src;
+	if(index < 0 || index >= stack_size(stack))
+	{
+		return 0;
+	}
+
+	src = stack->values + index * stack->element_size;
+	memcpy(value, src, stack->element_size);
+	return 1;
+}
+
 unsigned int stack_size(struct stack *stack)
 {
 	return stack->position / stack->element_size;
