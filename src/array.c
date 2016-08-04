@@ -51,7 +51,7 @@ int8_t array_pop(struct array *array, void *value)
 int8_t array_get(struct array *array, unsigned int index, void *value)
 {
 	void *src;
-	if(index < 0 || index >= array_size(array))
+	if(index >= array_size(array))
 	{
 		return 0;
 	}
