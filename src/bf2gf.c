@@ -5,6 +5,7 @@
 #include <ctype.h>
 #include <sys/time.h>
 #include <time.h>
+#include <limits.h>
 
 void gf_write_line(char *basedir, unsigned int line, char *text);
 int isbf(int c);
@@ -13,7 +14,7 @@ int main(int argc, char *argv[])
 {
 	FILE *fp;
 	int c;
-	unsigned int line = 0, buflen = 5, ctr = 0;
+	unsigned int line = 0, buflen = NAME_MAX, ctr = 0;
 	char text[buflen];
 
 	if(argc < 3)
@@ -29,12 +30,14 @@ int main(int argc, char *argv[])
 		return 1;
 	}
 
+	/*
 	if(mkdir(argv[2], 600) != 0)
 	{
 		perror(argv[2]);
 		fclose(fp);
 		return 1;
 	}
+	*/
 
 	text[ctr++] = '0';
 	while((c = fgetc(fp)) != EOF)
