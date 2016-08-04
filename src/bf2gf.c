@@ -76,6 +76,7 @@ void gf_write_line(char *basedir, unsigned int line, char *text)
 	if(mkdir(buf, atoi("0700")) != 0)
 	{
 		perror(buf);
+		exit(1);
 	}
 
 	times[0].tv_sec = time(NULL);
