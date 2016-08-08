@@ -63,12 +63,12 @@ void bf_interpret_char(struct bf_state *state, char c)
 
 void bf_plus(struct bf_state state)
 {
-	fprintf(state.stream, "\tincq\t(%%rbp, %%r12)\n");
+	fprintf(state.stream, "\tincb\t(%%rbp, %%r12)\n");
 }
 
 void bf_minus(struct bf_state state)
 {
-	fprintf(state.stream, "\tdecq\t(%%rbp, %%r12)\n");
+	fprintf(state.stream, "\tdecb\t(%%rbp, %%r12)\n");
 }
 
 void bf_dot(struct bf_state state)
