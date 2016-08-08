@@ -13,5 +13,6 @@ install: all
 	cp src/gfcc.sh /usr/local/bin/gfcc
 	chmod +x /usr/local/bin/gfcc
 
-bin/%: src/%.c $(OBJS) 
+bin/%: src/%.c $(OBJS)
+	mkdir -p bin
 	$(CC) $(CFLAGS) $^ -o $@
