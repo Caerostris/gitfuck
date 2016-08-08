@@ -84,7 +84,7 @@ int main(int argc, char *argv[])
 
 		// interpret brainfuck line
 		strncpy(line.text, entry->d_name, GF_LINE_MAX);
-		line.timespec = line_stat.st_mtimespec;
+		line.tv_sec = line_stat.st_mtime;
 		array_push(&gf_program, &line);
 	}
 
@@ -112,5 +112,5 @@ int8_t is_parent_folder(char *d_name)
 int gf_line_compare(const void *line1, const void *line2)
 {
 	const struct gf_line *l1 = line1, *l2 = line2;
-	return l1->timespec.tv_sec - l2->timespec.tv_sec;
+	return l1->tv_sec - l2->tv_sec;
 }

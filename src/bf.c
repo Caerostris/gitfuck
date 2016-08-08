@@ -2,6 +2,12 @@
 #include <stdlib.h>
 #include "bf.h"
 
+#ifdef __ELF__
+#define US ""
+#else
+#define US "_"
+#endif
+
 struct bf_state bf_start(FILE *stream)
 {
 	struct bf_state state;
@@ -10,7 +16,7 @@ struct bf_state bf_start(FILE *stream)
 	state.stream = stream;
 	state.loops = array_create(sizeof(int));
 
-	fprintf(state.stream, ".align 4\n.globl _main\n_main:\n\tpushq\t%%r12\n\tpushq\t\%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
+	fprintf(state.stream, ".align 4\n.globl "US"main\n"US"main:\n\tpushq\t%%r12\n\tpushq\t\%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
 
 	return state;
 }
@@ -57,22 +63,22 @@ void bf_interpret_char(struct bf_state *state, char c)
 
 void bf_plus(struct bf_state state)
 {
-	fprintf(state.stream, "\tincq\t(%%rbp, %%r12)\n");
+	fprintf(state.stream, "\tincb\t(%%rbp, %%r12)\n");
 }
 
 void bf_minus(struct bf_state state)
 {
-	fprintf(state.stream, "\tdecq\t(%%rbp, %%r12)\n");
+	fprintf(state.stream, "\tdecb\t(%%rbp, %%r12)\n");
 }
 
 void bf_dot(struct bf_state state)
 {
-	fprintf(state.stream, "\n\tmovsbl\t(%%rbp, %%r12), %%edi\n\tcall\t_putchar\n");
+	fprintf(state.stream, "\n\tmovsbl\t(%%rbp, %%r12), %%edi\n\tcall\t"US"putchar\n");
 }
 
 void bf_comma(struct bf_state state)
 {
-	fprintf(state.stream, "\n\tcall\t_getchar\n\tmovb\t%%al, (%%rbp, %%r12)\n");
+	fprintf(state.stream, "\n\tcall\t"US"getchar\n\tmovb\t%%al, (%%rbp, %%r12)\n");
 }
 
 void bf_up(struct bf_state *state)
