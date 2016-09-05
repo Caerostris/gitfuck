@@ -16,7 +16,7 @@ struct bf_state bf_start(FILE *stream)
 	state.stream = stream;
 	state.loops = array_create(sizeof(int));
 
-	fprintf(state.stream, ".align 4\n.globl "US"main\n"US"main:\n\tpushq\t%%r12\n\tpushq\t\%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
+	fprintf(state.stream, ".align 4\n.globl "US"main\n"US"main:\n\tpushq\t%%r12\n\tpushq\t%%rbx\n\tpushq\t%%rbp\n\tmovq\t%%rsp, %%rbp\n\tsubq\t$16, %%rsp\n\tmovq\t$-16, %%rbx\n\tmovq\t$0, 8(%%rsp)\n\tmovq\t$0, (%%rsp)\n\tmovq\t$-1, %%r12\n\n");
 
 	return state;
 }
